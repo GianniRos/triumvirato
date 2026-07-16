@@ -2,279 +2,187 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Triumvirato</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabellone Premi</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
     min-height:100vh;
-    background:#081126;
-    color:#f4ecd8;
-    font-family:Georgia,serif;
     display:flex;
     justify-content:center;
+    align-items:center;
+    background:#d9d9d9;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-.container{
-    width:100%;
-    max-width:1000px;
-    padding:20px;
-    text-align:center;
+.board{
+    width:min(95vw,1200px);
+    background:linear-gradient(
+            180deg,
+            #08117d 0%,
+            #1139ff 12%,
+            #08117d 24%,
+            #1139ff 36%,
+            #08117d 48%,
+            #1139ff 60%,
+            #08117d 72%,
+            #1139ff 84%,
+            #08117d 100%
+            );
+    padding:28px;
+    box-shadow:0 0 25px rgba(0,0,0,.35);
 }
 
-h1{
-    font-size:clamp(42px,10vw,72px);
-    color:#f3ce76;
-    margin:0;
-}
-
-p{
-    margin-bottom:30px;
-}
-
-select,button{
-    width:100%;
-    max-width:450px;
-    padding:16px;
-    border-radius:30px;
-    font-size:18px;
-    margin:8px;
-    border:none;
-}
-
-button{
-    cursor:pointer;
-    background:#f3ce76;
-}
-
-#counter{
-    font-size:clamp(20px,5vw,30px);
-    margin:25px 0;
-    color:#f3ce76;
-}
-
-#status{
-    font-size:clamp(24px,6vw,38px);
-    min-height:90px;
-    color:#f3ce76;
-    margin-bottom:20px;
-}
-
-#grid{
+.grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-    gap:10px;
-    width:100%;
+    grid-template-columns:1fr 1fr;
+    gap:18px 60px;
 }
 
-.region{
-    padding:16px;
-    border-radius:12px;
-    background:#1c2c58;
-    transition:all 1s ease;
-    word-break:break-word;
+.column{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.prize{
+    width:100%;
+    min-height:48px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-weight:900;
+    font-size:20px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:
+            inset 0 0 0 4px rgba(255,255,255,.35),
+            0 0 10px rgba(255,255,255,.2);
+}
+
+.left{
+    background:#5b96a8;
+}
+
+.right{
+    background:#ef0000;
+}
+
+.prize:hover{
+    transform:scale(1.02);
 }
 
 .off{
-    background:#111827;
-    opacity:.2;
-    transform:scale(.95);
+    background:#2a2a2a !important;
+    color:#777 !important;
+    box-shadow:none;
+    opacity:.35;
 }
 
-.winner{
-    background:#f3ce76 !important;
-    color:black;
-    box-shadow:0 0 40px #f3ce76;
-    transform:scale(1.08);
+.small{
+    font-size:14px;
+    line-height:1.1;
 }
 
-@media(max-width:600px){
-    .container{
-        padding:15px;
+@media(max-width:850px){
+
+    .grid{
+        grid-template-columns:1fr;
+        gap:30px;
     }
 
-    #grid{
-        grid-template-columns:repeat(2,1fr);
+    .prize{
+        font-size:18px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="board">
 
-<h1>TRIUMVIRATO</h1>
+    <div class="grid">
 
-<p>Tre amici. Tre dottorati. Una sola regione sopravviverà.</p>
+        <div class="column">
 
-<select id="winner">
-<option>Valle d'Aosta</option>
-<option>Piemonte</option>
-<option>Liguria</option>
-<option>Lombardia</option>
-<option>Trentino-Alto Adige</option>
-<option>Veneto</option>
-<option>Friuli-Venezia Giulia</option>
-<option>Emilia-Romagna</option>
-<option>Toscana</option>
-<option>Umbria</option>
-<option>Marche</option>
-<option>Lazio</option>
-<option>Abruzzo</option>
-<option>Molise</option>
-<option>Campania</option>
-<option>Puglia</option>
-<option>Basilicata</option>
-<option>Calabria</option>
-<option>Sicilia</option>
-<option>Sardegna</option>
-</select>
+            <button class="prize left">DURIAN</button>
 
-<br>
+            <button class="prize left">PISCIO DI MAGO</button>
 
-<button onclick="startGame()">INIZIA IL GIOCO</button>
+            <button class="prize left">SPUGNA DEL LAB</button>
 
-<div id="counter"></div>
+            <button class="prize left">L'ALTRA BANANA</button>
 
-<div id="status">
-Scegli la regione vincente.
+            <button class="prize left">
+                40 FETTE AL LATTE<br>
+                <span class="small">(E UN POLLO RAFFORZANTE)</span>
+            </button>
+
+            <button class="prize left">DISCOGRAFIA NICO PANDETTA</button>
+
+            <button class="prize left">UN CHILO DI GORGONZOLA</button>
+
+            <button class="prize left">2 SIGA 2 BIRRE 2 CUBI DI RUBIK</button>
+
+            <button class="prize left">ECCOLA</button>
+
+            <button class="prize left">&nbsp;</button>
+
+        </div>
+
+
+
+        <div class="column">
+
+            <button class="prize right">GADGET PERFORMATIVO</button>
+
+            <button class="prize right">LA BANANA</button>
+
+            <button class="prize right">BUONO BAFFI MESSICO</button>
+
+            <button class="prize right">GRATTA E VINCI</button>
+
+            <button class="prize right">UN KEBAB</button>
+
+            <button class="prize right">UNA CARBONARA SBURREVOLE</button>
+
+            <button class="prize right">UN DIVANO PER IL LAB</button>
+
+            <button class="prize right">UN NEGRONI DEL PARADISE</button>
+
+            <button class="prize right">VINO DI MADDI</button>
+
+            <button class="prize right">BUONO PER IL MESSICO</button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div id="grid"></div>
-
-</div>
 
 <script>
 
-const regions=[
-"Valle d'Aosta",
-"Piemonte",
-"Liguria",
-"Lombardia",
-"Trentino-Alto Adige",
-"Veneto",
-"Friuli-Venezia Giulia",
-"Emilia-Romagna",
-"Toscana",
-"Umbria",
-"Marche",
-"Lazio",
-"Abruzzo",
-"Molise",
-"Campania",
-"Puglia",
-"Basilicata",
-"Calabria",
-"Sicilia",
-"Sardegna"
-];
+const buttons = document.querySelectorAll(".prize");
 
-const grid=document.getElementById("grid");
+buttons.forEach(button=>{
 
-function rid(r){
-    return "r"+btoa(unescape(encodeURIComponent(r)));
-}
+    button.addEventListener("click",()=>{
 
-function draw(){
-    grid.innerHTML="";
-
-    regions.forEach(r=>{
-
-        const div=document.createElement("div");
-
-        div.className="region";
-        div.id=rid(r);
-        div.innerText=r;
-
-        grid.appendChild(div);
+        button.classList.toggle("off");
 
     });
-}
 
-draw();
-
-function getDelay(rem){
-
-    if(rem>10) return 600;
-    if(rem>6) return 1200;
-    if(rem>4) return 2500;
-    if(rem>2) return 4500;
-
-    return 7000;
-}
-
-
-function startGame(){
-
-    draw();
-
-    const winner=document.getElementById("winner").value;
-
-    const others=regions
-    .filter(r=>r!==winner)
-    .sort(()=>Math.random()-0.5);
-
-    let i=0;
-
-    document.getElementById("status").innerText=
-    "IL VERDETTO SI AVVICINA";
-
-    document.getElementById("counter").innerText=
-    "20 REGIONI ANCORA IN GIOCO";
-
-
-    function next(){
-
-        if(i>=others.length){
-
-            document.getElementById(rid(winner))
-            .classList.add("winner");
-
-            document.getElementById("status").innerHTML=
-            "IL TRIUMVIRATO HA DECISO<br>"+winner.toUpperCase();
-
-            document.getElementById("counter").innerText="";
-
-            return;
-        }
-
-
-        const name=others[i++];
-
-        document.getElementById(rid(name))
-        .classList.add("off");
-
-
-        const remainingOthers=others.length-i;
-        const totalRemaining=remainingOthers+1;
-
-
-        document.getElementById("counter").innerText=
-        totalRemaining+" REGIONI ANCORA IN GIOCO";
-
-
-        if(totalRemaining<=5 && totalRemaining>2){
-            document.getElementById("status").innerText=
-            "LA TENSIONE SALE...";
-        }
-
-        if(totalRemaining<=2){
-            document.getElementById("status").innerText=
-            "IL TRIUMVIRATO STA DECIDENDO...";
-        }
-
-
-        setTimeout(next,getDelay(totalRemaining));
-
-    }
-
-    setTimeout(next,2500);
-
-}
+});
 
 </script>
 
