@@ -29,11 +29,17 @@ body{
     font-family:Arial,Helvetica,sans-serif;
 
     background-image:url("sfondo.png");
-    background-position:center;
+    background-position:center center;
     background-repeat:no-repeat;
-    background-size:cover;
-    background-attachment:fixed;
 
+    /*
+    L'immagine sarà sempre visibile
+    ma non verrà mai zoomata troppo
+    */
+
+    background-size:100% auto;
+
+    background-color:black;
 }
 
 
