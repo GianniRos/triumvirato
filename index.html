@@ -3,180 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gioco Completo</title>
+<title>Tabellone Premi</title>
+
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
+
 body{
-margin:0;
-min-height:100vh;
-background:#d9d9d9;
-font-family:Arial,Helvetica,sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#d9d9d9;
+    font-family:Arial, Helvetica, sans-serif;
 }
-.hidden{display:none!important}
-.phase{width:100%;display:flex;justify-content:center;align-items:center}
+
 .board{
-width:min(95vw,1200px);
-background:linear-gradient(180deg,#08117d 0%,#1139ff 12%,#08117d 24%,#1139ff 36%,#08117d 48%,#1139ff 60%,#08117d 72%,#1139ff 84%,#08117d 100%);
-padding:28px;
-box-shadow:0 0 25px rgba(0,0,0,.35);
+    width:min(95vw,1200px);
+    background:linear-gradient(
+            180deg,
+            #08117d 0%,
+            #1139ff 12%,
+            #08117d 24%,
+            #1139ff 36%,
+            #08117d 48%,
+            #1139ff 60%,
+            #08117d 72%,
+            #1139ff 84%,
+            #08117d 100%
+            );
+    padding:28px;
+    box-shadow:0 0 25px rgba(0,0,0,.35);
 }
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 60px}
-.column{display:flex;flex-direction:column;gap:18px}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px 60px;
+}
+
+.column{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
 .prize{
-width:100%;min-height:48px;border:none;border-radius:10px;color:white;
-font-weight:900;font-size:20px;text-transform:uppercase;cursor:pointer;
-transition:.3s;
-box-shadow:inset 0 0 0 4px rgba(255,255,255,.35),0 0 10px rgba(255,255,255,.2);
+    width:100%;
+    min-height:48px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-weight:900;
+    font-size:20px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:
+            inset 0 0 0 4px rgba(255,255,255,.35),
+            0 0 10px rgba(255,255,255,.2);
 }
-.left{background:#5b96a8}
-.right{background:#ef0000}
-.off{background:#2a2a2a!important;color:#777!important;box-shadow:none;opacity:.35}
-.small{font-size:14px;line-height:1.1}
-.continueBox{text-align:center;margin-top:25px}
-#continueBtn{
-padding:18px 35px;font-size:22px;font-weight:bold;border:none;border-radius:20px;
-cursor:pointer;background:#f3ce76;display:none;
+
+.left{
+    background:#5b96a8;
 }
-#phase2{
-background:#081126;color:#f4ecd8;font-family:Georgia,serif;min-height:100vh;
+
+.right{
+    background:#ef0000;
 }
-.container{width:100%;max-width:1000px;padding:20px;text-align:center}
-h1{font-size:clamp(42px,10vw,72px);color:#f3ce76;margin:0}
-p{margin-bottom:30px}
-select,button.regionStart{width:100%;max-width:450px;padding:16px;border-radius:30px;font-size:18px;margin:8px;border:none}
-button.regionStart{cursor:pointer;background:#f3ce76}
-#counter{font-size:clamp(20px,5vw,30px);margin:25px 0;color:#f3ce76}
-#status{font-size:clamp(24px,6vw,38px);min-height:90px;color:#f3ce76;margin-bottom:20px}
-#regionGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;width:100%}
-.region{padding:16px;border-radius:12px;background:#1c2c58;transition:all 1s ease;word-break:break-word}
-.region.off{background:#111827!important;opacity:.2;transform:scale(.95)}
-.winner{background:#f3ce76!important;color:black;box-shadow:0 0 40px #f3ce76;transform:scale(1.08)}
-@media(max-width:850px){.grid{grid-template-columns:1fr}.prize{font-size:18px}}
-@media(max-width:600px){.container{padding:15px}#regionGrid{grid-template-columns:repeat(2,1fr)}}
+
+.prize:hover{
+    transform:scale(1.02);
+}
+
+.off{
+    background:#2a2a2a !important;
+    color:#777 !important;
+    box-shadow:none;
+    opacity:.35;
+}
+
+.small{
+    font-size:14px;
+    line-height:1.1;
+}
+
+@media(max-width:850px){
+
+    .grid{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .prize{
+        font-size:18px;
+    }
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div id="phase1" class="phase">
 <div class="board">
-<div class="grid">
-<div class="column">
-<button class="prize left">DURIAN</button>
-<button class="prize left">PISCIO DI MAGO</button>
-<button class="prize left">SPUGNA DEL LAB</button>
-<button class="prize left">L'ALTRA BANANA</button>
-<button class="prize left">40 FETTE AL LATTE<br><span class="small">(E UN POLLO RAFFORZANTE)</span></button>
-<button class="prize left">DISCOGRAFIA NICO PANDETTA</button>
-<button class="prize left">UN CHILO DI GORGONZOLA</button>
-<button class="prize left">2 SIGA 2 BIRRE 2 CUBI DI RUBIK</button>
-<button class="prize left">ECCOLA</button>
-<button class="prize left">&nbsp;</button>
-</div>
-<div class="column">
-<button class="prize right">GADGET PERFORMATIVO</button>
-<button class="prize right">LA BANANA</button>
-<button class="prize right">BUONO BAFFI MESSICO</button>
-<button class="prize right">GRATTA E VINCI</button>
-<button class="prize right">UN KEBAB</button>
-<button class="prize right">UNA CARBONARA SBURREVOLE</button>
-<button class="prize right">UN DIVANO PER IL LAB</button>
-<button class="prize right">UN NEGRONI DEL PARADISE</button>
-<button class="prize right">VINO DI MADDI</button>
-<button class="prize right">BUONO PER IL MESSICO</button>
-</div>
-</div>
-<div class="continueBox">
-<button id="continueBtn">CONTINUA CON LA REGIONE FORTUNATA</button>
-</div>
-</div>
+
+    <div class="grid">
+
+        <div class="column">
+
+            <button class="prize left">DURIAN</button>
+
+            <button class="prize left">PISCIO DI MAGO</button>
+
+            <button class="prize left">SPUGNA DEL LAB</button>
+
+            <button class="prize left">L'ALTRA BANANA</button>
+
+            <button class="prize left">
+                40 FETTE AL LATTE<br>
+                <span class="small">(E UN POLLO RAFFORZANTE)</span>
+            </button>
+
+            <button class="prize left">DISCOGRAFIA NICO PANDETTA</button>
+
+            <button class="prize left">UN CHILO DI GORGONZOLA</button>
+
+            <button class="prize left">2 SIGA 2 BIRRE 2 CUBI DI RUBIK</button>
+
+            <button class="prize left">ECCOLA</button>
+
+            <button class="prize left">&nbsp;</button>
+
+        </div>
+
+
+
+        <div class="column">
+
+            <button class="prize right">GADGET PERFORMATIVO</button>
+
+            <button class="prize right">LA BANANA</button>
+
+            <button class="prize right">BUONO BAFFI MESSICO</button>
+
+            <button class="prize right">GRATTA E VINCI</button>
+
+            <button class="prize right">UN KEBAB</button>
+
+            <button class="prize right">UNA CARBONARA SBURREVOLE</button>
+
+            <button class="prize right">UN DIVANO PER IL LAB</button>
+
+            <button class="prize right">UN NEGRONI DEL PARADISE</button>
+
+            <button class="prize right">VINO DI MADDI</button>
+
+            <button class="prize right">BUONO PER IL MESSICO</button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div id="phase2" class="phase hidden">
-<div class="container">
-<h1>TRIUMVIRATO</h1>
-<p>Tre amici. Tre dottorati. Una sola regione sopravviverà.</p>
-<select id="winner"></select><br>
-<button class="regionStart" onclick="startGame()">INIZIA IL GIOCO</button>
-<div id="counter"></div>
-<div id="status">Scegli la regione vincente.</div>
-<div id="regionGrid"></div>
-</div>
-</div>
 
 <script>
-const buttons=document.querySelectorAll(".prize");
-function checkAllOff(){
-const all=[...buttons].every(b=>b.classList.contains("off"));
-document.getElementById("continueBtn").style.display=all?"inline-block":"none";
-}
-buttons.forEach(button=>{
-button.addEventListener("click",()=>{
-button.classList.toggle("off");
-checkAllOff();
-});
-});
-document.getElementById("continueBtn").onclick=()=>{
-document.getElementById("phase1").classList.add("hidden");
-document.body.style.background="#081126";
-document.getElementById("phase2").classList.remove("hidden");
-window.scrollTo(0,0);
-};
 
-const regions=["Valle d'Aosta","Piemonte","Liguria","Lombardia","Trentino-Alto Adige","Veneto","Friuli-Venezia Giulia","Emilia-Romagna","Toscana","Umbria","Marche","Lazio","Abruzzo","Molise","Campania","Puglia","Basilicata","Calabria","Sicilia","Sardegna"];
-const select=document.getElementById("winner");
-regions.forEach(r=>{
-let o=document.createElement("option");
-o.textContent=r;
-select.appendChild(o);
+const buttons = document.querySelectorAll(".prize");
+
+buttons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        button.classList.toggle("off");
+
+    });
+
 });
-const grid=document.getElementById("regionGrid");
-function draw(){
-grid.innerHTML="";
-regions.forEach(r=>{
-const d=document.createElement("div");
-d.className="region";
-d.id="r"+btoa(unescape(encodeURIComponent(r)));
-d.innerText=r;
-grid.appendChild(d);
-});
-}
-function rid(r){return 'r'+btoa(unescape(encodeURIComponent(r)));}
-draw();
-function getDelay(rem){
-if(rem>10)return 600;
-if(rem>6)return 1200;
-if(rem>4)return 2500;
-if(rem>2)return 4500;
-return 7000;
-}
-function startGame(){
-draw();
-const winner=document.getElementById("winner").value;
-const others=regions.filter(r=>r!==winner).sort(()=>Math.random()-0.5);
-let i=0;
-document.getElementById('status').innerText='IL VERDETTO SI AVVICINA';
-document.getElementById('counter').innerText='20 REGIONI ANCORA IN GIOCO';
-function next(){
-if(i>=others.length){
-document.getElementById(rid(winner)).classList.add('winner');
-document.getElementById('status').innerHTML='IL TRIUMVIRATO HA DECISO<br>'+winner.toUpperCase();
-document.getElementById('counter').innerText='';
-return;
-}
-const name=others[i++];
-document.getElementById(rid(name)).classList.add('off');
-const remaining=others.length-i+1;
-document.getElementById('counter').innerText=(remaining+1)+' REGIONI ANCORA IN GIOCO';
-if(remaining<=5&&remaining>2)document.getElementById('status').innerText='LA TENSIONE SALE...';
-if(remaining<=2)document.getElementById('status').innerText='IL TRIUMVIRATO STA DECIDENDO...';
-setTimeout(next,getDelay(remaining));
-}
-setTimeout(next,2500);
-}
+
 </script>
+
 </body>
 </html>
