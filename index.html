@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="it">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>SFIDA ALLA CAOS</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-}
-
 body{
 
     margin:0;
@@ -24,22 +7,21 @@ body{
     justify-content:center;
     align-items:center;
 
-    overflow:hidden;
+    overflow-x:hidden;
 
     font-family:Arial,Helvetica,sans-serif;
 
     background-image:url("sfondo.png");
-    background-position:center center;
+
     background-repeat:no-repeat;
+    background-position:center center;
 
-    /*
-    L'immagine sarà sempre visibile
-    ma non verrà mai zoomata troppo
-    */
+    /* L'immagine sarà sempre visibile */
 
-    background-size:100% auto;
+    background-size:contain;
 
     background-color:black;
+
 }
 
 
@@ -54,14 +36,19 @@ body::before{
     inset:0;
 
     background:
-    rgba(0,0,0,.30);
+
+    radial-gradient(
+    circle,
+    rgba(0,0,0,.10) 0%,
+    rgba(0,0,0,.45) 70%,
+    rgba(0,0,0,.65) 100%
+    );
 
     pointer-events:none;
 
 }
 
 
-/* TABELLONE */
 
 .board{
 
@@ -69,13 +56,15 @@ body::before{
 
     z-index:10;
 
-    width:min(95vw,1250px);
+    /* più piccolo */
 
-    padding:30px;
+    width:min(85vw,1050px);
+
+    padding:25px;
 
     border-radius:30px;
 
-    border:4px solid
+    border:3px solid
     rgba(255,215,0,.8);
 
 
@@ -85,25 +74,26 @@ body::before{
 
     180deg,
 
-    #08117d 0%,
-    #1139ff 12%,
-    #08117d 24%,
-    #1139ff 36%,
-    #08117d 48%,
-    #1139ff 60%,
-    #08117d 72%,
-    #1139ff 84%,
-    #08117d 100%
+    rgba(8,17,125,.92) 0%,
+    rgba(17,57,255,.92) 12%,
+    rgba(8,17,125,.92) 24%,
+    rgba(17,57,255,.92) 36%,
+    rgba(8,17,125,.92) 48%,
+    rgba(17,57,255,.92) 60%,
+    rgba(8,17,125,.92) 72%,
+    rgba(17,57,255,.92) 84%,
+    rgba(8,17,125,.92) 100%
 
     );
 
 
     box-shadow:
 
-    0 0 25px #00c8ff,
-    0 0 60px rgba(255,215,0,.6);
+    0 0 30px #00c8ff,
+    0 0 70px rgba(255,215,0,.50);
 
 }
+
 
 
 .grid{
@@ -114,27 +104,27 @@ body::before{
 
     1fr 1fr;
 
-    gap:18px 60px;
+    gap:15px 40px;
 
 }
+
 
 
 .column{
 
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap:15px;
 
 }
 
 
-/* PREMI */
 
 .prize{
 
     width:100%;
 
-    min-height:50px;
+    min-height:45px;
 
     border:none;
 
@@ -144,7 +134,7 @@ body::before{
 
     font-weight:900;
 
-    font-size:20px;
+    font-size:18px;
 
     text-transform:uppercase;
 
@@ -154,238 +144,18 @@ body::before{
 
     box-shadow:
 
-    inset 0 0 0 4px
+    inset 0 0 0 3px
     rgba(255,255,255,.35),
 
-    0 0 15px
+    0 0 10px
     rgba(255,255,255,.25);
 
 }
 
 
-.left{
-
-    background:#6aa7b7;
-
-}
-
-
-.right{
-
-    background:#ef0000;
-
-}
-
-
-.prize:hover{
-
-    transform:scale(1.02);
-
-}
-
-
-.off{
-
-    background:#1e1e1e !important;
-
-    color:#777 !important;
-
-    opacity:.35;
-
-    box-shadow:none;
-
-}
-
 
 .small{
 
-    font-size:14px;
-    line-height:1.1;
+    font-size:13px;
 
 }
-
-
-/* RESPONSIVE */
-
-@media(max-width:850px){
-
-.grid{
-
-    grid-template-columns:1fr;
-
-    gap:25px;
-
-}
-
-
-.prize{
-
-    font-size:18px;
-
-}
-
-}
-
-
-</style>
-
-</head>
-
-
-<body>
-
-
-
-<div class="board">
-
-<div class="grid">
-
-
-<div class="column">
-
-<button class="prize left">
-DURIAN
-</button>
-
-<button class="prize left">
-PISCIO DI MAGO
-</button>
-
-<button class="prize left">
-SPUGNA DEL LAB
-</button>
-
-<button class="prize left">
-L'ALTRA BANANA
-</button>
-
-<button class="prize left">
-
-40 FETTE AL LATTE
-
-<br>
-
-<span class="small">
-
-(E UN POLLO RAFFORZANTE)
-
-</span>
-
-</button>
-
-
-<button class="prize left">
-DISCOGRAFIA NICO PANDETTA
-</button>
-
-
-<button class="prize left">
-UN CHILO DI GORGONZOLA
-</button>
-
-
-<button class="prize left">
-2 SIGA 2 BIRRE 2 CUBI DI RUBIK
-</button>
-
-
-<button class="prize left">
-ECCOLA
-</button>
-
-
-<button class="prize left">
-&nbsp;
-</button>
-
-
-</div>
-
-
-
-
-<div class="column">
-
-
-<button class="prize right">
-GADGET PERFORMATIVO
-</button>
-
-
-<button class="prize right">
-LA BANANA
-</button>
-
-
-<button class="prize right">
-BUONO BAFFI MESSICO
-</button>
-
-
-<button class="prize right">
-GRATTA E VINCI
-</button>
-
-
-<button class="prize right">
-UN KEBAB
-</button>
-
-
-<button class="prize right">
-UNA CARBONARA SBURREVOLE
-</button>
-
-
-<button class="prize right">
-UN DIVANO PER IL LAB
-</button>
-
-
-<button class="prize right">
-UN NEGRONI DEL PARADISE
-</button>
-
-
-<button class="prize right">
-VINO DI MADDI
-</button>
-
-
-<button class="prize right">
-BUONO PER IL MESSICO
-</button>
-
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<script>
-
-const buttons = document
-.querySelectorAll(".prize");
-
-
-buttons.forEach(button=>{
-
-
-button.addEventListener("click",()=>{
-
-button.classList.toggle("off");
-
-});
-
-
-});
-
-</script>
-
-
-</body>
-</html>
