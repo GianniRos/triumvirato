@@ -60,7 +60,6 @@ body::before{
 
     z-index:10;
 
-    /* CAMBIA QUI LA LARGHEZZA */
     width:min(92vw,1250px);
 
     padding:15px;
@@ -342,7 +341,7 @@ VINO DI MADDI
 
 
 <button class="prize right">
-BUONO PER IL MESSICO
+&nbsp;
 </button>
 
 
@@ -359,11 +358,24 @@ BUONO PER IL MESSICO
 
 const buttons = document.querySelectorAll(".prize");
 
+// Diventa true quando il BUONO PER IL MESSICO è stato assegnato.
+let messicoAssegnato = false;
 
-buttons.forEach(button=>{
+buttons.forEach((button) => {
 
-    button.addEventListener("click",()=>{
+    button.addEventListener("click", () => {
 
+        // SOLO il primo click della partita
+        // trasforma il pulsante nel BUONO PER IL MESSICO.
+        if (!messicoAssegnato) {
+
+            messicoAssegnato = true;
+            button.innerHTML = "BUONO PER IL MESSICO";
+
+        }
+
+        // Tutti i pulsanti, compreso quello del Messico,
+        // possono essere spenti e riaccesi normalmente.
         button.classList.toggle("off");
 
     });
